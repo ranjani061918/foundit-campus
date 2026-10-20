@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f6f1">
+  <meta name="description" content="FoundIt! Campus helps students reconnect lost belongings with their owners.">
+  <title>FoundIt! Campus — Lost something?</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="FoundIt Campus home">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span>FoundIt<span class="brand-dot">!</span> <small>Campus</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#browse">Browse items</a>
+      <a href="#matches">Potential matches <span class="nav-count" id="nav-match-count">0</span></a>
+      <a href="#how-it-works">How it works</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch theme"><span id="theme-icon" aria-hidden="true">☾</span></button>
+      <button class="button button-primary button-small" id="header-report" type="button"><span aria-hidden="true">＋</span> Report an item</button>
+      <button class="menu-toggle icon-button" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+  <nav class="mobile-nav" id="mobile-nav" hidden aria-label="Mobile navigation">
+    <a href="#browse">Browse items</a><a href="#matches">Potential matches</a><a href="#how-it-works">How it works</a>
+  </nav>
+
+  <main id="main">
+    <section class="hero section-wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> THE CAMPUS LOST &amp; FOUND</div>
+        <h1>Lost something?<br><span>Let’s reconnect it.</span></h1>
+        <p class="hero-description">A bottle left in the lab. Keys after class. Earbuds that vanished between lectures. Find your things without sending the same message to five WhatsApp groups.</p>
+        <div class="hero-search">
+          <span aria-hidden="true" class="search-icon">⌕</span>
+          <label class="sr-only" for="search-input">Search items</label>
+          <input id="search-input" type="search" placeholder="Try “blue bottle” or “library”…" autocomplete="off">
+          <button id="search-button" class="button button-primary" type="button">Search</button>
+        </div>
+        <div class="hero-quicklinks"><span><span class="tiny-check">✓</span> Simple campus reports</span><span><span class="tiny-check">✓</span> Smart rule-based suggestions</span></div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of campus items waiting to be reunited" role="img">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="art-note note-top"><span class="note-icon">✦</span><span><b>Found something?</b><small>Help it find its person.</small></span></div>
+        <div class="art-card card-bottle"><div class="bottle-cap"></div><div class="bottle-body"><span class="bottle-label">HYDRATE<br>YOURSELF</span></div></div>
+        <div class="art-card card-keys"><span class="key-ring"></span><span class="key-shaft"></span><span class="key-tooth"></span></div>
+        <div class="art-card card-notebook"><span class="notebook-line"></span><span class="notebook-line"></span><span class="notebook-line"></span><span class="notebook-sticker">F!</span></div>
+        <div class="art-note note-bottom"><span class="pulse-dot"></span><span><b>Small things matter.</b><small>Let’s bring them back.</small></span></div>
+        <div class="art-spark spark-one">✳</div><div class="art-spark spark-two">✦</div>
+      </div>
+      <div class="hero-stats">
+        <div><strong id="stat-open">0</strong><span>Open reports</span></div><div class="stat-divider"></div>
+        <div><strong id="stat-lost">0</strong><span>Lost items</span></div><div class="stat-divider"></div>
+        <div><strong id="stat-found">0</strong><span>Found items</span></div>
+        <div class="stats-note"><span class="live-dot"></span> Updates on this device</div>
+      </div>
+    </section>
+
+    <section class="matches-section section-wrap" id="matches">
+      <div class="section-heading">
+        <div><div class="eyebrow">A LITTLE CLUE CAN GO A LONG WAY</div><h2>Potential matches <span class="heading-count" id="match-count">0</span></h2><p>Suggestions based on category, colour, location and date. Not confirmations.</p></div>
+        <button class="text-button" id="refresh-matches" type="button">Refresh suggestions <span aria-hidden="true">↗</span></button>
+      </div>
+      <div id="matches-list" class="match-grid"></div>
+      <div id="matches-empty" class="empty-state compact-empty" hidden><span class="empty-illustration">⌕</span><h3>No potential matches yet</h3><p>When a lost report and a found report share useful details, suggestions will appear here.</p><button class="button button-outline" id="match-report-cta" type="button">Add a report</button></div>
+    </section>
+
+    <section class="browse-section section-wrap" id="browse">
+      <div class="section-heading browse-heading">
+        <div><div class="eyebrow">THE CAMPUS NOTICEBOARD, MINUS THE SCROLLING</div><h2>Browse reports</h2><p>One place for the things that shouldn’t stay lost.</p></div>
+        <button class="button button-primary" id="browse-report" type="button">＋ Report an item</button>
+      </div>
+      <div class="filter-bar">
+        <div class="segmented" role="group" aria-label="Filter by report type">
+          <button class="segment active" type="button" data-type="all" aria-pressed="true">All items</button>
+          <button class="segment" type="button" data-type="lost" aria-pressed="false">Lost</button>
+          <button class="segment" type="button" data-type="found" aria-pressed="false">Found</button>
+        </div>
+        <div class="filter-selects">
+          <label class="sr-only" for="category-filter">Filter by category</label>
+          <select id="category-filter"><option value="all">All categories</option><option>Electronics</option><option>Water bottles</option><option>Keys</option><option>Books &amp; notes</option><option>Bags</option><option>Clothing</option><option>Cards &amp; stationery</option><option>Other</option></select>
+          <label class="sr-only" for="location-filter">Filter by location</label>
+          <select id="location-filter"><option value="all">All locations</option></select>
+          <label class="sr-only" for="status-filter">Filter by status</label>
+          <select id="status-filter"><option value="open">Open reports</option><option value="resolved">Resolved</option><option value="all">All statuses</option></select>
+        </div>
+      </div>
+      <div class="results-line"><span id="results-count">Showing 0 reports</span><button id="clear-filters" class="text-button subtle" type="button">Clear filters</button></div>
+      <div class="item-grid" id="reports-grid"></div>
+      <div class="empty-state" id="reports-empty" hidden><span class="empty-illustration">＋</span><h3>It’s quiet around here</h3><p>No reports match those filters. Try a different search or be the first to post one.</p><button class="button button-primary" id="empty-report-cta" type="button">Report an item</button></div>
+      <div class="data-actions"><span>Using sample data? You can clear the fictional examples anytime.</span><button class="text-button danger-text" id="remove-samples" type="button">Remove sample reports</button></div>
+    </section>
+
+    <section class="how-section section-wrap" id="how-it-works">
+      <div class="how-intro"><div class="eyebrow">GOOD THINGS FIND THEIR WAY BACK</div><h2>Three steps.<br>One less headache.</h2><p>FoundIt! keeps reports tidy and suggests possible overlaps. You stay in control of the next step.</p></div>
+      <div class="how-steps">
+        <article class="how-step"><span class="step-number">01</span><div class="step-icon blue-icon">↗</div><h3>Post the details</h3><p>Share the item, category, colour and general campus location. Keep unique identifiers private.</p></article>
+        <article class="how-step"><span class="step-number">02</span><div class="step-icon orange-icon">⌕</div><h3>Check suggestions</h3><p>The matching rules compare lost and found reports and explain why a pair might fit.</p></article>
+        <article class="how-step"><span class="step-number">03</span><div class="step-icon green-icon">✓</div><h3>Verify privately</h3><p>Use an appropriate college channel to check ownership. A suggestion is only a starting point.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-wrap"><a class="brand footer-brand" href="#"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>FoundIt<span class="brand-dot">!</span> <small>Campus</small></span></a><p>A small prototype for a more helpful campus.</p><div class="footer-notice"><span aria-hidden="true">ⓘ</span> Prototype only. Reports live in this browser and are not shared with other students or monitored by college staff.</div><span class="footer-copy">© 2026 FoundIt! Campus</span></footer>
+
+  <dialog id="report-dialog" class="modal">
+    <div class="modal-head"><div><div class="eyebrow">ADD TO THE NOTICEBOARD</div><h2 id="form-title">Report an item</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close report form">×</button></div>
+    <p class="modal-intro">Share enough to help, but save unique identifying details for private verification.</p>
+    <form id="report-form" novalidate>
+      <div class="form-grid">
+        <fieldset class="field full-field"><legend>What happened? <span class="required">*</span></legend><div class="choice-row"><label class="choice-card"><input type="radio" name="type" value="lost" checked><span class="choice-symbol lost-symbol">⌕</span><span><b>I lost something</b><small>Help me find it</small></span></label><label class="choice-card"><input type="radio" name="type" value="found"><span class="choice-symbol found-symbol">✦</span><span><b>I found something</b><small>Help it find its owner</small></span></label></div></fieldset>
+        <div class="field"><label for="item-name">Item name <span class="required">*</span></label><input id="item-name" name="name" maxlength="70" required placeholder="e.g. Stainless steel bottle"><span class="field-error" id="name-error"></span></div>
+        <div class="field"><label for="item-category">Category <span class="required">*</span></label><select id="item-category" name="category" required><option value="">Choose a category</option><option>Electronics</option><option>Water bottles</option><option>Keys</option><option>Books &amp; notes</option><option>Bags</option><option>Clothing</option><option>Cards &amp; stationery</option><option>Other</option></select><span class="field-error" id="category-error"></span></div>
+        <div class="field"><label for="item-colour">Colour</label><input id="item-colour" name="colour" maxlength="40" placeholder="e.g. Navy blue"></div>
+        <div class="field"><label for="item-location">Campus location <span class="required">*</span></label><select id="item-location" name="location" required></select><span class="field-error" id="location-error"></span></div>
+        <div class="field"><label for="item-date"><span id="date-label">Date lost</span> <span class="required">*</span></label><input id="item-date" name="date" type="date" required><span class="field-error" id="date-error"></span></div>
+        <div class="field full-field"><label for="item-description">Short description <span class="required">*</span></label><textarea id="item-description" name="description" maxlength="280" rows="3" required placeholder="A few helpful details, without unique serial numbers or private information."></textarea><div class="field-hint"><span id="description-count">0</span>/280 characters</div><span class="field-error" id="description-error"></span></div>
+        <div class="field full-field"><label for="item-photo">Item photo <span class="optional">(optional)</span></label><input id="item-photo" name="photo" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><span class="field-hint">Image files only, maximum 2 MB. Please don’t upload IDs or documents with sensitive details.</span><div class="photo-preview" id="photo-preview" hidden><img id="photo-preview-image" alt="Preview of selected item photo"><button class="text-button danger-text" id="remove-photo" type="button">Remove photo</button></div><span class="field-error" id="photo-error"></span></div>
+        <div class="field full-field private-field"><label for="private-details">Private identifying details <span class="optional">(optional, kept on this device)</span></label><textarea id="private-details" name="privateDetails" rows="2" maxlength="200" placeholder="Only details you can use to verify ownership later. Never displayed on public cards."></textarea><span class="field-hint">This field is stored locally and is not shown in the public report. Avoid passwords, student IDs or contact information.</span></div>
+      </div>
+      <div class="form-alert" id="form-alert" role="alert" hidden></div>
+      <div class="modal-actions"><button class="button button-outline" id="cancel-report" type="button">Cancel</button><button class="button button-primary" id="preview-report" type="button">Preview report <span aria-hidden="true">↗</span></button></div>
+    </form>
+  </dialog>
+
+  <dialog id="preview-dialog" class="modal preview-modal">
+    <div class="modal-head"><div><div class="eyebrow">ONE LAST LOOK</div><h2>Preview your report</h2></div><button class="icon-button close-preview" type="button" aria-label="Close preview">×</button></div>
+    <p class="modal-intro">Check that the public details are helpful and don’t reveal anything too personal.</p>
+    <div id="preview-content"></div>
+    <div class="modal-actions"><button class="button button-outline" id="back-to-edit" type="button">Back to edit</button><button class="button button-primary" id="submit-report" type="button">Publish report <span aria-hidden="true">✓</span></button></div>
+  </dialog>
+
+  <dialog id="detail-dialog" class="modal detail-modal">
+    <div class="modal-head"><div><div class="eyebrow">REPORT DETAILS</div><h2 id="detail-title">Item details</h2></div><button class="icon-button close-detail" type="button" aria-label="Close details">×</button></div>
+    <div id="detail-content"></div>
+  </dialog>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <script type="application/json" id="app-config">{"prototype":true}</script>
+</body>
+</html>
