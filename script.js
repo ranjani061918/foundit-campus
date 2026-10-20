@@ -1,3 +1,4 @@
+
 (() => {
   "use strict";
   const STORAGE_KEY = "foundit-campus-reports-v1";
